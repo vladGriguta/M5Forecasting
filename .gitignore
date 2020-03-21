@@ -1,0 +1,11 @@
+# Include types of files that should not be transfered to the online repository
+
+*.csv
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
