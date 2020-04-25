@@ -62,6 +62,7 @@ def readData():
     sales_train_validation = pd.read_csv('m5-forecasting-accuracy/sales_train_validation.csv')
     print('Sales train validation has {} rows and {} columns'.format(sales_train_validation.shape[0], sales_train_validation.shape[1]))
     
+    
     submission = pd.read_csv('m5-forecasting-accuracy/sample_submission.csv')
     
     return calendar, sell_prices, sales_train_validation, submission
@@ -80,6 +81,7 @@ def melt_and_merge(calendar, sell_prices, sales_train_validation, submission, nr
     # melt sales data, get it ready for training
     sales_train_validation = pd.melt(sales_train_validation, id_vars = ['id', 'item_id', 'dept_id', 'cat_id', 'store_id', 'state_id'], 
                                      var_name = 'day', value_name = 'demand')
+    
     print('Melted sales train validation has {} rows and {} columns'.format(sales_train_validation.shape[0], sales_train_validation.shape[1]))
     sales_train_validation = reduce_mem_usage(sales_train_validation)
     
@@ -90,11 +92,10 @@ def melt_and_merge(calendar, sell_prices, sales_train_validation, submission, nr
     test2 = submission[submission['id'].isin(test2_rows)]
     
     # change column names
-    test1.columns = ['id', 'd_1914', 'd_1915', 'd_1916', 'd_1917', 'd_1918', 'd_1919', 'd_1920', 'd_1921', 'd_1922', 'd_1923', 'd_1924', 'd_1925', 'd_1926', 'd_1927', 'd_1928', 'd_1929', 'd_1930', 'd_1931', 
-                      'd_1932', 'd_1933', 'd_1934', 'd_1935', 'd_1936', 'd_1937', 'd_1938', 'd_1939', 'd_1940', 'd_1941']
-    test2.columns = ['id', 'd_1942', 'd_1943', 'd_1944', 'd_1945', 'd_1946', 'd_1947', 'd_1948', 'd_1949', 'd_1950', 'd_1951', 'd_1952', 'd_1953', 'd_1954', 'd_1955', 'd_1956', 'd_1957', 'd_1958', 'd_1959', 
-                      'd_1960', 'd_1961', 'd_1962', 'd_1963', 'd_1964', 'd_1965', 'd_1966', 'd_1967', 'd_1968', 'd_1969']
-    
+    test1.columns = ['id'] + ['d_{}'.format(i) for i in range(1914,1942)]
+    test2.columns = ['id'] + ['d_{}'.format(i) for i in range(1942,1970)]
+
+
     # get product table
     product = sales_train_validation[['id', 'item_id', 'dept_id', 'cat_id', 'store_id', 'state_id']].drop_duplicates()
     
