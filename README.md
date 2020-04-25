@@ -9,12 +9,9 @@ My plan for the initial day of work on this project is to get a model working an
 
 ### Action list:
 
-1. Understand the format of the input data
+1. Find a way to read in the full dataset
+2. Involve Feature Selection to eliminate redundancy
+3. Copy over Ideas from Popular kernels
 
-2. Comprime the data to save space
 
-3. Run the most simplistic forecasting algorithm on the comprimed dataset
-
-4. Compute the accuracy metric.
-
-5. Submit the result
+### Current best rmse 2.15297 - Top 53 %
