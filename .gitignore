@@ -1,5 +1,8 @@
 # Include types of files that should not be transfered to the online repository
 
+_*.ipynb
+
+*.pkl
 *.csv
 *.7z
 *.dmg
